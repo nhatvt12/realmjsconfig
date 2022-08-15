@@ -1,0 +1,31 @@
+{
+	"compilerOptions": {
+		"target": "es2018",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"strict": true,
+		"strictFunctionTypes": false,
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"outDir": "dist",
+		"lib": [
+			"es2018"
+		],
+		"types": [
+			"realm",
+			"realm-network-transport",
+			"bson",
+			"buffer",
+			"mocha",
+			"chai"
+		],
+		"noImplicitAny": true
+	},
+	"include": [
+		"src/typings.d.ts",
+		"src/**/*.ts"
+	],
+	"exclude": [
+		"src/node"
+	]
+}

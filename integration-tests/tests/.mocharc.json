@@ -1,0 +1,13 @@
+{
+  "extension": [
+    "ts",
+    "js"
+  ],
+  "require": [
+    "ts-node/register/transpile-only",
+    "src/node/inject-globals.ts"
+  ],
+  "node-option": [
+    "expose_gc"
+  ]
+}

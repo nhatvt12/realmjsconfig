@@ -1,0 +1,24 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"noResolve": true,
+		"types": [
+			"realm-network-transport",
+			"@realm.io/common",
+			"js-base64",
+			"bson",
+			"buffer",
+			"detect-browser"
+		],
+		"lib": [
+			"es2019",
+			"dom"
+		]
+	},
+	"exclude": [
+		"../**/*.test.ts",
+		"../node/",
+		"../tests/",
+		"../../types/environment.d.ts"
+	]
+}

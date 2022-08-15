@@ -1,0 +1,57 @@
+{
+  "name": "realm-electron-tests",
+  "description": "Test harness running the Realm JS tests in the Electron renderer process.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Realm",
+    "email": "help@realm.io",
+    "url": "https://realm.io"
+  },
+  "private": true,
+  "main": "app/main.js",
+  "scripts": {
+    "lint": "eslint .",
+    "package": "electron-builder --dir",
+    "runner:main": "node runner.js main",
+    "runner:renderer": "node runner.js renderer",
+    "test": "npm run test:main && npm run test:renderer",
+    "test:main": "mocha-remote --id main -- concurrently npm:app-importer npm:runner:main",
+    "test:renderer": "mocha-remote --id renderer -- concurrently npm:app-importer npm:runner:renderer",
+    "app-importer": "realm-app-importer serve ../../realm-apps"
+  },
+  "devDependencies": {
+    "cmake-js": "^6.1.0",
+    "command-line-args": "^5.1.1",
+    "concurrently": "^6.0.2",
+    "electron": "^12.0.1",
+    "electron-builder": "^22.10.5",
+    "mocha-github-actions-reporter": "^0.2.3",
+    "mocha-junit-reporter": "^2.0.0",
+    "mocha-remote-cli": "^1.5.0",
+    "realm-app-importer": "*"
+  },
+  "dependencies": {
+    "@realm/integration-tests": "*",
+    "fs-extra": "^9.1.0",
+    "mocha": "^8.3.2",
+    "mocha-remote-client": "^1.5.0",
+    "node-fetch": "^2.6.1",
+    "realm": "*"
+  },
+  "build": {
+    "appId": "io.realm.realm-js.electron-tests",
+    "mac": {
+      "category": "public.app-category.developer-tools"
+    },
+    "files": [
+      "./app/**/*",
+      "./node_modules/**/*",
+      "./package.json",
+      "!node_modules/realm/android${/*}",
+      "!node_modules/realm/react-native${/*}",
+      "!node_modules/realm/scripts${/*}",
+      "!node_modules/realm/src${/*}",
+      "!node_modules/realm/vendor${/*}"
+    ]
+  }
+}

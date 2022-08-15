@@ -1,0 +1,29 @@
+{
+  "name": "mongodb",
+  "type": "mongodb",
+  "config": {
+    "flexible_sync": {
+      "state": "enabled",
+      "database_name": "test-database",
+      "queryable_fields_names": [
+        "age",
+        "name"
+      ],
+      "permissions": {
+        "rules": {},
+        "defaultRoles": [
+          {
+            "name": "all",
+            "applyWhen": {},
+            "read": true,
+            "write": true
+          }
+        ]
+      }
+    }
+  },
+  "secret_config": {
+    "uri": "local-mongodb-uri"
+  },
+  "version": 1
+}

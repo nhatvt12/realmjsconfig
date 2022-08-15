@@ -1,0 +1,14 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"lib": [
+			"ES2015",
+			"DOM"
+		]
+	},
+	"exclude": [
+		"../node/*",
+		"../react-native/*",
+		"../**/*.test.ts"
+	]
+}

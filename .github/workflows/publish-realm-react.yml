@@ -1,0 +1,47 @@
+name: Publish Realm React
+
+on:
+  push:
+    tags:
+      - realm-react-v*
+env:
+  REALM_DISABLE_ANALYTICS: 1
+
+jobs:
+  test-build-and-publish:
+    name: Test, build & publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: "recursive"
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install npm v7
+        run: npm install -g npm@7
+
+      - name: Install realm node dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Bootstrap @realm/react
+        run: npm install realm --prefix packages/realm-react --no-save
+        env:
+          npm_config_realm_local_prebuilds: ${{ github.workspace }}/prebuilds
+
+      - name: Build realm react
+        working-directory: packages/realm-react
+        run: npm run build
+
+      - name: Run tests
+        working-directory: packages/realm-react
+        run: npm run test
+
+      # Publish the package
+      - run: npm publish
+        working-directory: packages/realm-react
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
